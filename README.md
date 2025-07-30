@@ -1,2 +1,2 @@
 # goredis
-Пишу свой redis на Go
+Golang Redis implementation
