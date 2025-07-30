@@ -21,7 +21,7 @@ func ping(args []resp.Value) resp.Value {
 }
 
 func echo(args []resp.Value) resp.Value {
-	if len(args) == 0 || len(args) > 1 {
+	if len(args) != 1 {
 		return resp.Value{Typ: resp.ValueTypeError, Str: "wrong number of arguments for 'echo' command"}
 	}
 
