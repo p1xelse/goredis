@@ -18,6 +18,8 @@ func main() {
 	defer ln.Close()
 	fmt.Println("Listening on :6379")
 
+	go handlers.ExpireJob()
+
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
@@ -36,11 +38,11 @@ func handleConnection(conn net.Conn) {
 		resp := respPkg.NewResp(conn, conn)
 		value, err := resp.Read()
 		if err != nil {
-			fmt.Println(err)
+			log.Printf("resp read error: %v\n", err)
 			return
 		}
 
-		value.Print()
+		// value.Print()
 
 		if value.Typ != respPkg.ValueTypeArray {
 			fmt.Println("Invalid request, expected array")
